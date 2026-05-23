@@ -6,7 +6,7 @@ import HomePage from "./pages/HomePage";
 import ItineraryListPage from "./pages/ItineraryListPage";
 import ItineraryViewPage from "./pages/ItineraryViewPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-import SharedItineraryViewPage from "./pages/sharedItineraryViewPage";
+import SharedItineraryViewPage from "./pages/SharedItineraryViewPage";
 
 function App() {
   return (
