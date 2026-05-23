@@ -15,8 +15,9 @@ const RegisterPage = () => {
     e.preventDefault();
 
     try {
-      await registerUser(form);
-      navigate("/");
+      const res = await registerUser(form);
+      localStorage.setItem("token", res.token);
+      navigate("/home");
     } catch (err) {
       alert("Register Failed");
     }
