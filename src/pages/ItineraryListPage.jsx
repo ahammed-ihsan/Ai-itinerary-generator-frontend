@@ -5,6 +5,7 @@ import NavbarComponent from "../components/NavbarComponent";
 
 const ItineraryListPage = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchData();
@@ -13,6 +14,7 @@ const ItineraryListPage = () => {
   const fetchData = async () => {
     const res = await getAllItineraries();console.log(res);
     setData(res);
+    setLoading(false);
   };
 
   return (
@@ -39,7 +41,17 @@ const ItineraryListPage = () => {
               </tr>
             </thead>
 
-            {data.length === 0 && (
+            {loading && (
+              <tbody>
+                <tr>
+                  <td colSpan="5" className="text-center">
+                    Loading...
+                  </td>
+                </tr>
+              </tbody>
+            )}
+
+            {!loading && data.length === 0 && (
               <tbody>
                 <tr>
                   <td colSpan="5" className="text-center">
