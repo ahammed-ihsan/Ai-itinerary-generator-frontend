@@ -37,7 +37,7 @@ const SharedItineraryViewPage = () => {
       </div>
     ) : error ? (
   <div className="container vh-100 d-flex align-items-center justify-content-center">
-    <h3 className="text-center text-danger">
+    <h3 className="text-center">
       {error.message || "Something went wrong"}
     </h3>
   </div>
