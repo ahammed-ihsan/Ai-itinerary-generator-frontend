@@ -8,16 +8,19 @@ const SharedItineraryViewPage = () => {
     const [selectedDay, setSelectedDay] = useState(0);
     const [itinerary, setItinerary] = useState(null);
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {   
             console.log('use');
-            try{
+            try{                
                 const data = await getItineraryByshareLink(id);console.log(data);
                 setItinerary(data.itinerary);
                 setLoading(false);
             }catch(err){
                 console.log(err);
+                setError(err);
+                setLoading(false);
             }        
         
         };
@@ -32,7 +35,13 @@ const SharedItineraryViewPage = () => {
       <div className="container vh-100 d-flex align-items-center justify-content-center">
         <h3 className="text-center">Loading...</h3>
       </div>
-    ) : (
+    ) : error ? (
+  <div className="container vh-100 d-flex align-items-center justify-content-center">
+    <h3 className="text-center text-danger">
+      {error.message || "Something went wrong"}
+    </h3>
+  </div>
+): (
 
     <div className="container py-5">
         {/* <button className="btn btn-dark" onClick={()=>{handleShare()}}>share</button> */}
