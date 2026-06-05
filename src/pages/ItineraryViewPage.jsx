@@ -8,6 +8,7 @@ const ItineraryViewPage = () => {
 
   const [itinerary, setItinerary] = useState(null);
   const [selectedDay, setSelectedDay] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchData();
@@ -16,9 +17,10 @@ const ItineraryViewPage = () => {
   const fetchData = async () => {
     const data = await getItineraryById(id);console.log(data);
     setItinerary(data.itinerary);
+    setLoading(false);
   };
 
-  if (!itinerary) return <h3>Loading...</h3>;
+  // if (!itinerary) return <h3 className="text-center">Loading...</h3>;
   const shareData = {
     title: "Itinerary",
     text: "Check this out!",
@@ -45,6 +47,12 @@ const ItineraryViewPage = () => {
   return (
     <>
     <NavbarComponent />
+
+    {loading ? (
+      <div className="container vh-100 d-flex align-items-center justify-content-center">
+        <h3 className="text-center">Loading...</h3>
+      </div>
+    ) : (
 
     <div className="container py-5">
         <button className="btn btn-dark mb-3" onClick={()=>{handleShare()}}>share</button>
@@ -112,6 +120,7 @@ const ItineraryViewPage = () => {
 
       </div>
     </div>
+    )}
     </>
   );
 };

@@ -7,6 +7,7 @@ const SharedItineraryViewPage = () => {
     const { id } = useParams();console.log(id);
     const [selectedDay, setSelectedDay] = useState(0);
     const [itinerary, setItinerary] = useState(null);
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fetchData = async () => {   
@@ -14,6 +15,7 @@ const SharedItineraryViewPage = () => {
             try{
                 const data = await getItineraryByshareLink(id);console.log(data);
                 setItinerary(data.itinerary);
+                setLoading(false);
             }catch(err){
                 console.log(err);
             }        
@@ -25,6 +27,13 @@ const SharedItineraryViewPage = () => {
 
     
   return (
+    <>
+    {loading ? (
+      <div className="container vh-100 d-flex align-items-center justify-content-center">
+        <h3 className="text-center">Loading...</h3>
+      </div>
+    ) : (
+
     <div className="container py-5">
         {/* <button className="btn btn-dark" onClick={()=>{handleShare()}}>share</button> */}
 
@@ -91,6 +100,8 @@ const SharedItineraryViewPage = () => {
 
       </div>
     </div>
+    )}
+    </>
   )
 }
 
